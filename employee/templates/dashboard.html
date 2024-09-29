@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">  <!-- Link to external CSS -->
+    <script src="{% static 'js/admin.js' %}" defer></script>  <!-- Link to external JavaScript -->
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to the Admin Panel</h2>
+        <a href="{% url 'employee_list' %}" class="link-button">Employee List</a>
+    </div>
+</body>
+</html>

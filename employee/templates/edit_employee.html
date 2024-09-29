@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'employee_list' %}">Employee List</a></li>
+            {% if user.is_authenticated %}
+                <li><span class="username">{{ user.get_full_name }} -</span></li>
+            {% else %}
+                <li><span class="username">Guest -</span></li>
+            {% endif %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>    
+<h2>Edit Employee</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ employee.name }}" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ employee.email }}" required>
+    </div>
+    <div>
+        <label for="mobile">Mobile:</label>
+        <input type="text" id="mobile" name="mobile" value="{{ employee.mobile }}" required>
+    </div>
+    <div>
+        <label for="designation">Designation:</label>
+        <select id="designation" name="designation" required>
+            <option value="HR" {% if employee.designation == "HR" %}selected{% endif %}>HR</option>
+            <option value="Manager" {% if employee.designation == "Manager" %}selected{% endif %}>Manager</option>
+            <option value="Sales" {% if employee.designation == "Sales" %}selected{% endif %}>Sales</option>
+        </select>
+    </div>
+    <div>
+        <label>Gender:</label>
+        <div class="options">
+            <input type="radio" id="male" name="gender" value="Male" {% if employee.gender == "Male" %}checked{% endif %} required>
+            <label for="male">Male</label>
+            
+            <input type="radio" id="female" name="gender" value="Female" {% if employee.gender == "Female" %}checked{% endif %} required>
+            <label for="female">Female</label>
+            
+            <input type="radio" id="other" name="gender" value="Other" {% if employee.gender == "Other" %}checked{% endif %} required>
+            <label for="other">Other</label>
+        </div>
+    </div>
+    <div>
+        <label>Select Courses:</label>
+        <div class="options">
+            <input type="checkbox" id="course1" name="courses" value="MCA" {% if "MCA" in employee.course %}checked{% endif %}>
+            <label for="course1">MCA</label>
+            
+            <input type="checkbox" id="course2" name="courses" value="BCA" {% if "BCA" in employee.course %}checked{% endif %}>
+            <label for="course2">BCA</label>
+            
+            <input type="checkbox" id="course3" name="courses" value="BSE" {% if "BSE" in employee.course %}checked{% endif %}>
+            <label for="course3">BSE</label>
+        </div>
+    </div>
+    <div>
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image">
+    </div>
+    
+    <button type="submit">Update</button>
+</form>
+
+</body>
+</html>
