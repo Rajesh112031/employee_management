@@ -1,1 +1,1 @@
-"# employee_management" 
+py manage.py runserver
